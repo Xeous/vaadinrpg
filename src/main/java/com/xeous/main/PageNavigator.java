@@ -15,11 +15,11 @@ public class PageNavigator extends Navigator {
 
 	@Override
 	public void navigateTo(String navigationState) {
-		if (((MainUI) UI.getCurrent()).getLoggedin() == true) {
-			super.navigateTo("MainLayout");
+		if (((MainUI) UI.getCurrent()).getLoggedin() == false) {
+			super.navigateTo("login");
 		}
 		else {
-			super.navigateTo("login");
+			super.navigateTo("MainLayout");
 		}
 	}
 }

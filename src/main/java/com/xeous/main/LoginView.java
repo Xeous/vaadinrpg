@@ -39,7 +39,6 @@ public class LoginView extends CustomComponent implements View{
 	private HorizontalLayout buttonsLayout;
 	private FormLayout loginLayout;
 	private CustomLayout mainLayout;
-	private RCharachter rcharachter;
 	private ShortcutListener enterShortcutListener = null;
 	private DefaultErrorHandler customErrorHandler;
 
@@ -77,7 +76,7 @@ public class LoginView extends CustomComponent implements View{
 				Notification.show(cause, Notification.Type.ERROR_MESSAGE);
 			}
 		};
-		//UI.getCurrent().setErrorHandler(customErrorHandler);
+	//	UI.getCurrent().setErrorHandler(customErrorHandler);
 	}
 	
 	protected void setupShortcutListener() {
@@ -100,8 +99,13 @@ public class LoginView extends CustomComponent implements View{
 				passwordField.focus();
 				throw new IllegalArgumentException("Töltse ki a Jelszó mezőt!");
 			}
+			else if(!(userName.equals("alma") && password.equals("alma"))){
+				usernameField.focus();
+				throw new IllegalArgumentException("Hibás felhasználónév vagy jelszó!");
+			}
 		} catch (Exception e) {
 			Notification.show(e.getMessage(), Notification.Type.WARNING_MESSAGE);
+			return;
 		}
 		((MainUI) UI.getCurrent()).setLoggedin(true);
 		UI.getCurrent().getNavigator().navigateTo("MainLayout");
