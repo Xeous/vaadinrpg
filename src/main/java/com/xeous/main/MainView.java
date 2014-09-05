@@ -6,6 +6,7 @@ import java.util.Map;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Sizeable.Unit;
+import com.vaadin.shared.ui.slider.SliderOrientation;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.AbstractOrderedLayout;
 import com.vaadin.ui.Alignment;
@@ -23,12 +24,13 @@ import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.PasswordField;
+import com.vaadin.ui.Slider;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class MainView extends CustomComponent implements View{
-	
+public class MainView extends CustomComponent implements View {
+
 	private VerticalLayout mainLayout;
 	private TextArea messagePanel;
 	private Button sendButton;
@@ -37,10 +39,10 @@ public class MainView extends CustomComponent implements View{
 	private TextField enterField;
 	private MenuBar barmenu;
 	private Label selection = new Label("-");
-	
+
 	public void enter(ViewChangeEvent event) {
 	}
-	
+
 	public MainView() {
 		super();
 		setup();
@@ -50,20 +52,24 @@ public class MainView extends CustomComponent implements View{
 		initFields();
 		initLayouts();
 	}
-	
+
 	protected void initLayouts() {
 		buttonsLayout = new HorizontalLayout();
 		buttonsLayout.setWidth(20, Unit.PERCENTAGE);
 		buttonsLayout.addComponent(sendButton);
-		buttonsLayout.setComponentAlignment(sendButton, Alignment.TOP_LEFT);
 		
+		messagePanel.setSizeFull();
+
 		textLayout = new VerticalLayout();
 		textLayout.setSizeFull();
-		textLayout.setMargin(false);
+		textLayout.setMargin(true);
 		textLayout.setSpacing(true);
 		textLayout.addComponent(messagePanel);
-		
-		mainLayout= new VerticalLayout();
+
+		mainLayout = new VerticalLayout();
+		mainLayout.setMargin(true);
+		mainLayout.setSizeFull();
+		mainLayout.setSpacing(true);
 		mainLayout.addComponent(barmenu);
 		mainLayout.addComponent(selection);
 		mainLayout = new VerticalLayout();
@@ -73,54 +79,40 @@ public class MainView extends CustomComponent implements View{
 
 		setCompositionRoot(mainLayout);
 	}
-	
+
 	protected void initFields() {
-		enterField= new TextField();
+		
+		enterField = new TextField();
 		messagePanel = new TextArea("Area");
+
 		messagePanel.setValue("Greetings adventurer!");
 		messagePanel.setReadOnly(true);
 		sendButton = new Button("Send the message");
 		setupMenu();
-		
+
 		sendButton.addListener(new ClickListener() {
-		    public void buttonClick(ClickEvent event) {
-		        doevent(enterField.getValue());
-		    }
+			public void buttonClick(ClickEvent event) {
+				doevent(enterField.getValue());
+			}
 		});
 	}
 
 	protected void setupMenu() {
 		barmenu = new MenuBar();
-		
-		MenuBar.Command mycommand = new MenuBar.Command() {
-		    public void menuSelected(MenuItem selectedItem) {
-		        selection.setValue("Ordered a " +
-		                selectedItem.getText() +
-		                " from menu.");
-		    }  
-		};
-		MenuBar.MenuItem beverages =
-			    barmenu.addItem("Beverages", null, null);
-			MenuBar.MenuItem hot_beverages =
-			    beverages.addItem("Hot", null, null);
-			hot_beverages.addItem("Tea", null, mycommand);
-			hot_beverages.addItem("Coffee", null, mycommand);
-			MenuBar.MenuItem cold_beverages =
-			    beverages.addItem("Cold", null, null);
-			cold_beverages.addItem("Milk", null, mycommand);
-			cold_beverages.addItem("Weissbier", null, mycommand);
 
-			MenuBar.MenuItem snacks =
-			    barmenu.addItem("Snacks", null, null);
-			snacks.addItem("Weisswurst", null, mycommand);
-			snacks.addItem("Bratwurst", null, mycommand);
-			snacks.addItem("Currywurst", null, mycommand);
-			        
-			MenuBar.MenuItem services =
-			    barmenu.addItem("Services", null, null);
-			services.addItem("Car Service", null, mycommand);
+		MenuBar.Command mycommand = new MenuBar.Command() {
+			public void menuSelected(MenuItem selectedItem) {
+				selection.setValue("Ordered a " + selectedItem.getText()
+						+ " from menu.");
+			}
+		};
+		MenuBar.MenuItem character = barmenu.addItem("Character", null, null);
+		character.addItem("Items", null, mycommand);
+		character.addItem("Character Page", null, mycommand);
+		character.addItem("Map", null, mycommand);
+		
 	}
-	
+
 	protected void doevent(String value) {
 		messagePanel.setReadOnly(false);
 		messagePanel.setValue(value);
@@ -133,11 +125,11 @@ public class MainView extends CustomComponent implements View{
 			field.setImmediate(true);
 		}
 	}
-	
+
 	protected void addComponentsToLayout(Layout layout, Component... component) {
 		for (Component c : component) {
 			layout.addComponent(c);
 		}
 	}
-	
+
 }

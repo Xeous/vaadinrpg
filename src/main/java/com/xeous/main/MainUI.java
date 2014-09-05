@@ -2,7 +2,6 @@ package com.xeous.main;
 
 
 import java.util.Locale;
-import java.util.concurrent.locks.Lock;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,12 +9,16 @@ import lombok.Setter;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 
 @Theme(value = "rpg")
 public class MainUI extends UI{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2409733662309776934L;
+
 	@Getter(AccessLevel.PROTECTED)
 	private static final String ADMIN_SESSION_ID = "admin";
 	
