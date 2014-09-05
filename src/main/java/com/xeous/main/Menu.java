@@ -16,6 +16,8 @@ import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
+import com.vaadin.ui.themes.ChameleonTheme;
+import com.vaadin.ui.themes.Reindeer;
 
 @Getter
 @Setter(AccessLevel.PROTECTED)
