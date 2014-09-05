@@ -1,30 +1,18 @@
 package com.xeous.main;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.Sizeable.Unit;
-import com.vaadin.shared.ui.slider.SliderOrientation;
 import com.vaadin.ui.AbstractComponent;
-import com.vaadin.ui.AbstractOrderedLayout;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.CustomLayout;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.Slider;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -39,18 +27,37 @@ public class MainView extends CustomComponent implements View {
 	private TextField enterField;
 	private MenuBar barmenu;
 	private Label selection = new Label("-");
+	private TabSheet tabSheet;
+	private Dashboard dashboard;
 
 	public void enter(ViewChangeEvent event) {
 	}
 
 	public MainView() {
 		super();
+		tabSheet = new TabSheet();
 		setup();
 	}
 
 	private void setup() {
-		initFields();
-		initLayouts();
+		mainLayout = new VerticalLayout();
+		mainLayout.setMargin(true);
+		mainLayout.setSizeFull();
+		mainLayout.setSpacing(true);
+		
+		dashboard = new Dashboard();
+		dashboard.setSizeFull();
+		tabSheet = new TabSheet();
+		tabSheet.addTab("Ruhafalva", dashboard, false);
+		tabSheet.setSizeFull();
+		mainLayout.addComponent(tabSheet);
+		mainLayout.setExpandRatio(tabSheet, 1.0f);
+		mainLayout.setSizeFull();
+		setSizeFull();
+		setCompositionRoot(mainLayout);
+		
+	//	initFields();
+	//	initLayouts();
 	}
 
 	protected void initLayouts() {

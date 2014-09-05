@@ -8,10 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 
 @Theme(value = "rpg")
+//@Widgetset("com.xeous.widgetset.ThirdPartyWidgetSet")
 public class MainUI extends UI{
 	
 	/**
