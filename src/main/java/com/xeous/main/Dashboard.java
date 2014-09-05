@@ -20,18 +20,18 @@ import com.vaadin.ui.themes.Reindeer;
 @Setter(AccessLevel.PROTECTED)
 public class Dashboard extends CustomComponent {
 
-	public static final String  REFRESH_BUTTON_CAPTION = "Dashboard Frissítés";
-	public static final Integer FIRST_SPLIT_POSITION   = 240;
-	public static final Integer SECOND_SPLIT_POSITION  = 830;
+	public static final String REFRESH_BUTTON_CAPTION = "Dashboard Frissítés";
+	public static final Integer FIRST_SPLIT_POSITION = 240;
+	public static final Integer SECOND_SPLIT_POSITION = 830;
 
-	private VerticalLayout             verticalLayout      = new VerticalLayout();
-	private HorizontalLayout           layout              = new HorizontalLayout();
-	private VerticalLayout             firstColumn         = new VerticalLayout();
-	private VerticalLayout             secondColumn        = new VerticalLayout();
-	private VerticalLayout             thirdColumn         = new VerticalLayout();
-	private VerticalLayout             refreshButtonLayout = new VerticalLayout();
-	private List<BaseDashboardElement> components          = new ArrayList<>();
-	private Button                     refreshButton       = new Button(REFRESH_BUTTON_CAPTION);
+	private VerticalLayout verticalLayout = new VerticalLayout();
+	private HorizontalLayout layout = new HorizontalLayout();
+	private VerticalLayout firstColumn = new VerticalLayout();
+	private VerticalLayout secondColumn = new VerticalLayout();
+	private VerticalLayout thirdColumn = new VerticalLayout();
+	private VerticalLayout refreshButtonLayout = new VerticalLayout();
+	private List<BaseDashboardElement> components = new ArrayList<>();
+	private Button refreshButton = new Button(REFRESH_BUTTON_CAPTION);
 	@Setter(AccessLevel.NONE)
 	private Button.ClickListener listener;
 	private BaseDashboardElement memoryUsageElement;
@@ -39,8 +39,10 @@ public class Dashboard extends CustomComponent {
 	private void setupSplitPanels() {
 		HorizontalSplitPanel horizontalSplitPanel = new HorizontalSplitPanel();
 		HorizontalSplitPanel horizontalSplitPanel2 = new HorizontalSplitPanel();
-		horizontalSplitPanel.setSplitPosition(FIRST_SPLIT_POSITION, Unit.PIXELS);
-		horizontalSplitPanel2.setSplitPosition(SECOND_SPLIT_POSITION, Unit.PIXELS);
+		horizontalSplitPanel
+				.setSplitPosition(FIRST_SPLIT_POSITION, Unit.PIXELS);
+		horizontalSplitPanel2.setSplitPosition(SECOND_SPLIT_POSITION,
+				Unit.PIXELS);
 		horizontalSplitPanel.setStyleName(Reindeer.SPLITPANEL_SMALL);
 		horizontalSplitPanel2.setStyleName(Reindeer.SPLITPANEL_SMALL);
 
@@ -61,7 +63,7 @@ public class Dashboard extends CustomComponent {
 		setCompositionRoot(verticalLayout);
 
 	}
-	
+
 	private void setupLayout() {
 		layout.setSizeFull();
 		layout.setHeight(100, Unit.PERCENTAGE);

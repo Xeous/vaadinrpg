@@ -9,7 +9,6 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
@@ -26,9 +25,9 @@ public class MainView extends CustomComponent implements View {
 	private VerticalLayout textLayout;
 	private TextField enterField;
 	private MenuBar barmenu;
-	private Label selection = new Label("-");
 	private TabSheet tabSheet;
 	private Dashboard dashboard;
+	private Menu menu;
 
 	public void enter(ViewChangeEvent event) {
 	}
@@ -44,20 +43,18 @@ public class MainView extends CustomComponent implements View {
 		mainLayout.setMargin(true);
 		mainLayout.setSizeFull();
 		mainLayout.setSpacing(true);
-		
+		menu = new Menu(this);
 		dashboard = new Dashboard();
 		dashboard.setSizeFull();
 		tabSheet = new TabSheet();
-		tabSheet.addTab("Ruhafalva", dashboard, false);
+		tabSheet.addTab("MainTab", dashboard, false);
 		tabSheet.setSizeFull();
+		mainLayout.addComponent(menu);
 		mainLayout.addComponent(tabSheet);
 		mainLayout.setExpandRatio(tabSheet, 1.0f);
 		mainLayout.setSizeFull();
 		setSizeFull();
 		setCompositionRoot(mainLayout);
-		
-	//	initFields();
-	//	initLayouts();
 	}
 
 	protected void initLayouts() {
@@ -78,7 +75,6 @@ public class MainView extends CustomComponent implements View {
 		mainLayout.setSizeFull();
 		mainLayout.setSpacing(true);
 		mainLayout.addComponent(barmenu);
-		mainLayout.addComponent(selection);
 		mainLayout = new VerticalLayout();
 		mainLayout.addComponent(textLayout);
 		mainLayout.addComponent(buttonsLayout);
@@ -103,14 +99,17 @@ public class MainView extends CustomComponent implements View {
 			}
 		});
 	}
-
+	
+	public void addTab(String caption, Component component, boolean skipPermissionCheck) {
+		tabSheet.addTab(caption, component);
+	}
+	
 	protected void setupMenu() {
 		barmenu = new MenuBar();
 
 		MenuBar.Command mycommand = new MenuBar.Command() {
 			public void menuSelected(MenuItem selectedItem) {
-				selection.setValue("Ordered a " + selectedItem.getText()
-						+ " from menu.");
+
 			}
 		};
 		MenuBar.MenuItem character = barmenu.addItem("Character", null, null);
