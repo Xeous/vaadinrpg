@@ -18,6 +18,9 @@ public class TabSheet extends com.vaadin.ui.TabSheet implements com.vaadin.ui.Ta
 		addSelectedTabChangeListener(this);
 		setSizeFull();
 
+
+
+
 		this.setCloseHandler(new com.vaadin.ui.TabSheet.CloseHandler() {
 
 			@Override
