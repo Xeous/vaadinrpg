@@ -3,10 +3,15 @@ package com.xeous.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.vaadin.gwtgraphics.client.DrawingArea;
+import org.vaadin.gwtgraphics.client.shape.Circle;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
@@ -69,6 +74,15 @@ public class Dashboard extends CustomComponent {
 		layout.setHeight(100, Unit.PERCENTAGE);
 		firstColumn.addComponent(memoryUsageElement);
 		firstColumn.addComponent(refreshButtonLayout);
+		DrawingArea canvas = new DrawingArea(400, 400);
+		Circle circle = new Circle(100, 100, 50);
+		circle.setFillColor("red");
+		canvas.add(circle);
+	//	secondColumn.addComponent(canvas);
+		DrawingArea canvas2 = new DrawingArea(400, 400);
+		RootPanel.get();
+		canvas2.add(circle);
+
 	}
 
 	protected void addComponent(BaseDashboardElement... elements) {
